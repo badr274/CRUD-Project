@@ -1,20 +1,37 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment } from "react";
+import { ChangeEvent, Fragment, memo, useState } from "react";
 import InputComponent from "./InputComponent";
 import { formInputsList } from "../../data";
 import ButtonComponent from "./ButtonComponent";
+import { IProduct } from "../../interfaces";
 
 interface IProps {
   isOpen: boolean;
   closeModal: () => void;
   title?: string;
 }
-const MyModal = ({ isOpen, closeModal, title }: IProps) => {
+const MyModal = memo(({ isOpen, closeModal, title }: IProps) => {
+  /*_______ STATES ________*/
+  const [product, setProduct] = useState<IProduct>({
+    title: '',
+    description: '',
+    imageURL: '',
+    price: '',
+    colors: [],
+    category: {
+      name: '',
+      imageURL: '',
+    }
+  })
+  /*_______ HANDLERS ________*/
+  const handleChangeInput = (e: ChangeEvent<HTMLInputElement>) => setProduct({ ...product, [e.target.name]: e.target.value })
+  console.log(product);
+  /*_______ RENDERS ________*/
   const inputs = formInputsList.map((input) => {
     return (
       <div key={input.id} className="flex flex-col gap-1 my-2">
         <label htmlFor={input.id} className="font-medium text-sm text-gray-700">{input.label}</label>
-        <InputComponent id={input.id} type={input.type} name={input.name} />
+        <InputComponent id={input.id} type={input.type} name={input.name} value={product[input.name]} onChange={handleChangeInput} />
       </div>
     );
   });
@@ -77,5 +94,5 @@ const MyModal = ({ isOpen, closeModal, title }: IProps) => {
       </Transition>
     </>
   );
-};
+})
 export default MyModal;

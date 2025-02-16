@@ -5,19 +5,20 @@ import { productList } from "./data";
 import ButtonComponent from "./components/ui/ButtonComponent";
 
 function App() {
-  // Renders
+  /*_______ STATES ________*/
+  const [isOpen, setIsOpen] = useState(false);
+
+
+  /*_______ HANDLERS ________*/
+  const closeModal = () => setIsOpen(false);
+  const openModal = () => setIsOpen(true);
+
+
+
+  /*_______ RENDER ________*/
   const renderProductsList = productList.map((product) => (
     <ProductCard key={product.id} product={product} />
   ));
-  const [isOpen, setIsOpen] = useState(false);
-
-  function closeModal() {
-    setIsOpen(false);
-  }
-
-  function openModal() {
-    setIsOpen(true);
-  }
   return (
     <main className="container mx-auto md:px-6">
       <ButtonComponent

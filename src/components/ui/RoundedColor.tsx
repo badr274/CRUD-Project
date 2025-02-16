@@ -1,11 +1,11 @@
-interface IProps {
-  color: string;
+import { HTMLAttributes } from "react";
+
+interface IProps extends HTMLAttributes<HTMLSpanElement> {
+  className: string;
 }
-const RoundedColor = ({ color }: IProps) => {
+const RoundedColor = ({ className, ...rest }: IProps) => {
   return (
-    <span
-      className={`w-5 h-5 bg-[${color}] rounded-full cursor-pointer`}
-    ></span>
+    <span className={`${className} w-5 h-5 rounded-full cursor-pointer`} {...rest}></span>
   );
 };
 

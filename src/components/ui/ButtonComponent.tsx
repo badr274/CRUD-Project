@@ -16,7 +16,7 @@ const ButtonComponent = ({
   return (
     <button
       type={type}
-      className={`${className} ${width} text-center p-2 rounded-md text-white cursor-pointer`}
+      className={`${className} ${width} text-center p-2 rounded-md text-white cursor-pointer transition-all`}
       {...res}
     >
       {children}

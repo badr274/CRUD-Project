@@ -1,19 +1,16 @@
 import { InputHTMLAttributes } from "react";
 // import { IFormInput } from "../../interfaces";
 
-interface IProps extends InputHTMLAttributes<HTMLInputElement> {
-  id: string;
-  name: string;
-  type: string;
-}
-const InputComponent = ({ id, type, name, ...res }: IProps) => {
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+interface IProps extends InputHTMLAttributes<HTMLInputElement> { }
+const InputComponent = ({ ...rest }: IProps) => {
   return (
     <input
-      id={id}
-      type={type}
-      name={name}
-      className="border-2 border-gray-300 focus:outline-0 rounded-md p-2"
-      {...res}
+
+      className="border-[1px] border-gray-300 rounded-md p-3
+       text-md shadow-md focus:outline-0 focus:border-indigo-500
+        focus:ring-1 focus:ring-indigo-500"
+      {...rest}
     />
   );
 };

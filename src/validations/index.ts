@@ -25,13 +25,13 @@ export const ProductValidation = (product: IProps) => {
   if (
     !product.description.trim() ||
     product.description.length < 20 ||
-    product.description.length > 500
+    product.description.length > 900
   ) {
     errors.description =
       "Product description must be between 20 and 500 characters";
   }
   // Image URL validation
-  const regExpImageURL = /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/g;
+  const regExpImageURL = /(http(s?):)([/|.|\w|\s|-])/g;
   if (!product.imageURL.trim() || !regExpImageURL.test(product.imageURL)) {
     errors.imageURL = "Valid image URL required";
   }

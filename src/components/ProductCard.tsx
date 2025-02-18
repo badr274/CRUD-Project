@@ -5,9 +5,11 @@ import ButtonComp from "./ui/ButtonComp";
 
 type Props = {
   product: IProduct;
+  openEditModal: () => void;
+  openDeleteModal: () => void;
 };
 
-const ProductCard = ({ product }: Props) => {
+const ProductCard = ({ product, openEditModal, openDeleteModal }: Props) => {
   const { imageURL, title, description, price, colors, category } = product;
 
   const renderProductColors = colors.length ? (
@@ -29,18 +31,29 @@ const ProductCard = ({ product }: Props) => {
       </div>
       <div className="flex items-center justify-between">
         <span className="font-semibold">${(+price).toLocaleString()}</span>
-        <img
-          src={category.imageURL}
-          alt="category image"
-          className="rounded-full w-10 h-10"
-        />
+        <div className="flex items-center gap-x-1">
+          <span className="text-sm">{category.name}</span>
+          <img
+            src={category.imageURL}
+            alt="category image"
+            className="rounded-full w-10 h-10"
+          />
+        </div>
       </div>
       <div className="flex gap-x-2 items-center mt-4">
-        <ButtonComp type="button" className="bg-indigo-700">
-          EDIT
+        <ButtonComp
+          type="button"
+          className="bg-indigo-700"
+          onClick={openEditModal}
+        >
+          Edit
         </ButtonComp>
-        <ButtonComp type="button" className="bg-red-700">
-          DELETE
+        <ButtonComp
+          type="button"
+          className="bg-pink-700"
+          onClick={openDeleteModal}
+        >
+          Remove
         </ButtonComp>
       </div>
     </div>

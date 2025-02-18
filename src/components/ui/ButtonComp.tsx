@@ -18,7 +18,7 @@ const ButtonComp = ({
     <button
       type={type}
       {...rest}
-      className={`${className} ${width} text-white rounded-md text-center p-2 flex-1 cursor-pointer`}
+      className={`${className} ${width} font-semibold text-white rounded-md text-center p-2 flex-1 cursor-pointer`}
     >
       {children}
     </button>

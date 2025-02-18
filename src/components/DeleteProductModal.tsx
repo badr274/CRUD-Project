@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import { IProduct } from "../interfaces";
 import ButtonComp from "./ui/ButtonComp";
 import MyModal from "./ui/Modal";
@@ -16,6 +17,11 @@ const DeleteProductModal = ({
   setProducts,
   productToDelete,
 }: IProps) => {
+  const deleteToast = () =>
+    toast.dark("Product deleted successfully!", {
+      position: "top-left",
+      icon: <>👍</>,
+    });
   const handleRemoveProduct = () => {
     const filteredProducts = products.filter(
       (p) => p.id !== productToDelete.id
@@ -23,7 +29,7 @@ const DeleteProductModal = ({
     console.log(filteredProducts);
     setProducts(filteredProducts);
     closeDeleteModal();
-    console.log(products);
+    deleteToast();
   };
   return (
     <MyModal
@@ -39,7 +45,7 @@ const DeleteProductModal = ({
       <div className="mt-7 flex items-center gap-x-2">
         <ButtonComp
           type="submit"
-          className="bg-pink-700"
+          className="bg-pink-700 hover:bg-pink-900"
           onClick={handleRemoveProduct}
         >
           Yes, remove

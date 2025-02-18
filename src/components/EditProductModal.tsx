@@ -8,6 +8,7 @@ import CircleColor from "./CircleColor";
 import SelectMenu from "./ui/SelectMenu";
 import { ProductValidation } from "../validations";
 import ErrorMessage from "./ErrorMessage";
+import { toast } from "react-toastify";
 
 interface IProps {
   isEditOpen: boolean;
@@ -34,6 +35,11 @@ const EditProductModal = ({
     price: "",
     colors: "",
   };
+  const editToast = () =>
+    toast.dark("Product Edited successfully!", {
+      position: "top-left",
+      icon: <>👍</>,
+    });
   const categoryOfProduct = categories.filter(
     (c) => c.name === product.category.name
   )[0];
@@ -89,6 +95,7 @@ const EditProductModal = ({
     product.category = selectedCategory;
     products[idxOfProduct] = product;
     setIsEditOpen(false);
+    editToast();
   };
 
   /*________RENDERS_________*/
@@ -158,13 +165,13 @@ const EditProductModal = ({
         <div className="mt-7 flex items-center gap-x-2">
           <ButtonComp
             type="submit"
-            className="bg-indigo-300 hover:bg-indigo-500"
+            className="bg-indigo-600 hover:bg-indigo-900"
           >
             Edit
           </ButtonComp>
           <ButtonComp
             type="button"
-            className="bg-gray-300 hover:bg-gray-500"
+            className="bg-gray-50 !text-black hover:text-white hover:bg-gray-400"
             onClick={closeEditModal}
           >
             Cancel

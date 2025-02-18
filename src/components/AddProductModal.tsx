@@ -8,6 +8,7 @@ import InputComponent from "./ui/InputComponent";
 import SelectMenu from "./ui/SelectMenu";
 import ButtonComp from "./ui/ButtonComp";
 import { v4 as uuid } from "uuid";
+import { toast } from "react-toastify";
 interface IProps {
   products: IProduct[];
   setProducts: (products: IProduct[]) => void;
@@ -15,6 +16,12 @@ interface IProps {
   setIsAddOpen: (isAddOpen: boolean) => void;
   defaultProduct: IProduct;
 }
+const addToast = () => {
+  return toast.dark("Product Added successfully!", {
+    position: "top-left",
+    icon: <>👍</>,
+  });
+};
 const AddProductModal = ({
   isAddOpen,
   setIsAddOpen,
@@ -94,6 +101,7 @@ const AddProductModal = ({
     console.log(product);
     setProducts([...products, product]);
     closeAddModal();
+    addToast();
   };
 
   /*________RENDERS_________*/
@@ -165,13 +173,13 @@ const AddProductModal = ({
         <div className="mt-7 flex items-center gap-x-2">
           <ButtonComp
             type="submit"
-            className="bg-indigo-300 hover:bg-indigo-500"
+            className="bg-indigo-600 hover:bg-indigo-900"
           >
             Add
           </ButtonComp>
           <ButtonComp
             type="button"
-            className="bg-gray-300 hover:bg-gray-500"
+            className="bg-gray-50 !text-black hover:text-white hover:bg-gray-400"
             onClick={closeAddModal}
           >
             Cancel

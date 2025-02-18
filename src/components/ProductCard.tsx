@@ -43,14 +43,14 @@ const ProductCard = ({ product, openEditModal, openDeleteModal }: Props) => {
       <div className="flex gap-x-2 items-center mt-4">
         <ButtonComp
           type="button"
-          className="bg-indigo-700"
+          className="bg-indigo-600 hover:bg-indigo-900"
           onClick={openEditModal}
         >
           Edit
         </ButtonComp>
         <ButtonComp
           type="button"
-          className="bg-pink-700"
+          className="bg-pink-700 hover:bg-pink-900"
           onClick={openDeleteModal}
         >
           Remove

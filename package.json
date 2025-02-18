@@ -1,5 +1,5 @@
 {
-  "name": "reactjs-basics",
+  "name": "crud",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@headlessui/react": "^2.2.0",
+    "@heroicons/react": "^2.2.0",
     "@tailwindcss/vite": "^4.0.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

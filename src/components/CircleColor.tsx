@@ -4,14 +4,14 @@ interface IProps extends HTMLAttributes<HTMLSpanElement> {
   color?: string;
   className?: string;
 }
-const RoundedColor = ({ color, className, ...rest }: IProps) => {
+const CircleColor = ({ color, className, ...rest }: IProps) => {
   return (
     <span
-      className={`${className} block w-5 h-5 rounded-full cursor-pointer`}
+      className={`${className} rounded-full  w-5 h-5 cursor-pointer`}
       style={{ backgroundColor: color }}
       {...rest}
     ></span>
   );
 };
 
-export default RoundedColor;
+export default CircleColor;

@@ -1,54 +1,47 @@
 import { IProduct } from "../interfaces";
-import { txtSlicer } from "../utils/functions";
-import ImageComponent from "./ImageComponent";
-import ButtonComponent from "./ui/ButtonComponent";
-import RoundedColor from "./ui/RoundedColor";
+import { sliceTxt } from "../utils/functions";
+import CircleColor from "./CircleColor";
+import ButtonComp from "./ui/ButtonComp";
 
-interface IProps {
+type Props = {
   product: IProduct;
-}
+};
 
-const ProductCard = ({ product }: IProps) => {
-  const { imageURL, title, description, price, category, colors } = product;
-  const roundedColors = colors.length ? (
-    colors.map((color, id) => (
-      <RoundedColor key={id} className={`bg-[${color}]`} />
-    ))
+const ProductCard = ({ product }: Props) => {
+  const { imageURL, title, description, price, colors, category } = product;
+
+  const renderProductColors = colors.length ? (
+    colors.map((color, idx) => {
+      return <CircleColor key={idx} color={color} />;
+    })
   ) : (
-    <RoundedColor className={"visible pointer-events-none"} />
+    <CircleColor className="pointer-events-none" />
   );
   return (
-    <div className="rounded-md shadow-md  mx-auto md:mx-0 max-w-sm md:mx-w-lg  overflow-hidden p-2 flex flex-col gap-y-3">
-      <ImageComponent
-        imageURL={imageURL}
-        alt="product image"
-        className="max-w-full flex-1 rounded-md lg:object-cover"
-      />
-      <h3 className="text-lg font-semibold">{txtSlicer(title, 25)}</h3>
-      <p className="text-xs text-gray-500 break-words">
-        {txtSlicer(description, 80)}
+    <div className="product-card rounded-md flex flex-col gap-y-2 p-2 shadow-md">
+      <img src={imageURL} alt="product image" className="rounded-md flex-1" />
+      <h3 className="font-semibold text-xl">{sliceTxt(title)}</h3>
+      <p className="text-sm text-gray-600 font-semibold">
+        {sliceTxt(description, 80)}
       </p>
-      <div className="colors flex items-center gap-x-1 ">{roundedColors}</div>
-
+      <div className="flex items-center gap-x-1 mt-2">
+        {renderProductColors}
+      </div>
       <div className="flex items-center justify-between">
-        <span className="font-medium">{`$${price}`}</span>
-        <ImageComponent
-          imageURL={category.imageURL}
-          alt="product image"
-          className="rounded-full w-10 h-10 object-center"
+        <span className="font-semibold">${(+price).toLocaleString()}</span>
+        <img
+          src={category.imageURL}
+          alt="category image"
+          className="rounded-full w-10 h-10"
         />
       </div>
-      <div className="flex items-center gap-x-2 mt-4">
-        <ButtonComponent
-          type="button"
-          className=" flex-1 bg-indigo-700"
-          width="w-full"
-        >
+      <div className="flex gap-x-2 items-center mt-4">
+        <ButtonComp type="button" className="bg-indigo-700">
           EDIT
-        </ButtonComponent>
-        <ButtonComponent type="button" className="flex-1 bg-red-700">
+        </ButtonComp>
+        <ButtonComp type="button" className="bg-red-700">
           DELETE
-        </ButtonComponent>
+        </ButtonComp>
       </div>
     </div>
   );

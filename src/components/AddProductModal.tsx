@@ -7,7 +7,7 @@ import { ProductValidation } from "../validations";
 import InputComponent from "./ui/InputComponent";
 import SelectMenu from "./ui/SelectMenu";
 import ButtonComp from "./ui/ButtonComp";
-
+import { v4 as uuid } from "uuid";
 interface IProps {
   products: IProduct[];
   setProducts: (products: IProduct[]) => void;
@@ -88,6 +88,7 @@ const AddProductModal = ({
       Object.values(returnedErrors).some((value) => value === "") &&
       Object.values(returnedErrors).every((value) => value === "");
     if (!hasErrorMsg) return;
+    product.id = uuid();
     product.colors = selectedColors;
     product.category = selectedCategory;
     console.log(product);
@@ -132,7 +133,7 @@ const AddProductModal = ({
     return (
       <span
         key={idx}
-        className="p-2 rounded-md"
+        className="p-1 rounded-md text-white text-sm"
         style={{ backgroundColor: color }}
       >
         {color}

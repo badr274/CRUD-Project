@@ -5,10 +5,26 @@ import MyModal from "./ui/Modal";
 interface IProps {
   isDeleteOpen: boolean;
   closeDeleteModal: () => void;
+  products: IProduct[];
+  setProducts: (products: IProduct[]) => void;
   productToDelete: IProduct;
-  idxOfProduct: number;
 }
-const DeleteProductModal = ({ isDeleteOpen, closeDeleteModal }: IProps) => {
+const DeleteProductModal = ({
+  isDeleteOpen,
+  closeDeleteModal,
+  products,
+  setProducts,
+  productToDelete,
+}: IProps) => {
+  const handleRemoveProduct = () => {
+    const filteredProducts = products.filter(
+      (p) => p.id !== productToDelete.id
+    );
+    console.log(filteredProducts);
+    setProducts(filteredProducts);
+    closeDeleteModal();
+    console.log(products);
+  };
   return (
     <MyModal
       title="Are you sure you want to delete this product form your store?"
@@ -21,7 +37,11 @@ const DeleteProductModal = ({ isDeleteOpen, closeDeleteModal }: IProps) => {
         be deleted, Please make sure this is the intended action
       </p>
       <div className="mt-7 flex items-center gap-x-2">
-        <ButtonComp type="submit" className="bg-pink-700">
+        <ButtonComp
+          type="submit"
+          className="bg-pink-700"
+          onClick={handleRemoveProduct}
+        >
           Yes, remove
         </ButtonComp>
         <ButtonComp

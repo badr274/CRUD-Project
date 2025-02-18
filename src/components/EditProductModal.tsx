@@ -107,7 +107,7 @@ const EditProductModal = ({
     return (
       <span
         key={idx}
-        className="p-2 rounded-md"
+        className="p-1 rounded-md text-white text-sm"
         style={{ backgroundColor: color }}
       >
         {color}

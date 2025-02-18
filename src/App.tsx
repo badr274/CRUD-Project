@@ -38,7 +38,6 @@ const App = () => {
   const openDeleteModal = (product: IProduct) => {
     setIsDeleteOpen(true);
     setProductToDelete(product);
-    setIdxOfProduct(products.indexOf(product));
   };
   const closeDeleteModal = () => setIsDeleteOpen(false);
 
@@ -83,8 +82,9 @@ const App = () => {
       <DeleteProductModal
         isDeleteOpen={isDeleteOpen}
         closeDeleteModal={closeDeleteModal}
+        products={products}
+        setProducts={setProducts}
         productToDelete={productToDelete}
-        idxOfProduct={idxOfProduct}
       />
       <div className="products grid grid-cols-1 gap-2 md:grid-cols-3 xl:grid-cols-4  ">
         {renderProducts}

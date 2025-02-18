@@ -56,16 +56,17 @@ const App = () => {
   });
   return (
     <>
-      {" "}
-      <div className="container mx-auto px-8 text-center">
-        <ButtonComp
-          type="button"
-          className="bg-indigo-600 hover:bg-indigo-900 cursor-pointer mt-6 mb-12 px-5"
-          width="w-fit"
-          onClick={openAddModal}
-        >
-          Add New Product
-        </ButtonComp>
+      <div className="container mx-auto px-8 ">
+        <div className="text-center">
+          <ButtonComp
+            type="button"
+            className="bg-indigo-600 hover:bg-indigo-900 cursor-pointer mt-6 mb-12 px-5"
+            width="w-fit"
+            onClick={openAddModal}
+          >
+            Add New Product
+          </ButtonComp>
+        </div>
         <AddProductModal
           isAddOpen={isAddOpen}
           setIsAddOpen={setIsAddOpen}

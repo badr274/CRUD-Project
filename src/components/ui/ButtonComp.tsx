@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, ReactNode } from "react";
+import { ButtonHTMLAttributes, memo, ReactNode } from "react";
 
 interface IProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   type: "button" | "submit" | "reset";
@@ -25,4 +25,4 @@ const ButtonComp = ({
   );
 };
 
-export default ButtonComp;
+export default memo(ButtonComp);

@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { IProduct } from "../interfaces";
 import { sliceTxt } from "../utils/functions";
 import CircleColor from "./CircleColor";
@@ -26,7 +27,7 @@ const ProductCard = ({ product, openEditModal, openDeleteModal }: Props) => {
       <p className="text-sm text-gray-600 font-semibold">
         {sliceTxt(description, 80)}
       </p>
-      <div className="flex items-center gap-x-1 mt-2">
+      <div className="flex items-center flex-wrap gap-x-1 mt-2">
         {renderProductColors}
       </div>
       <div className="flex items-center justify-between">
@@ -60,4 +61,4 @@ const ProductCard = ({ product, openEditModal, openDeleteModal }: Props) => {
   );
 };
 
-export default ProductCard;
+export default memo(ProductCard);

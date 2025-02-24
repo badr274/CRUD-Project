@@ -1,4 +1,13 @@
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import {
+  ChangeEvent,
+  Dispatch,
+  FormEvent,
+  memo,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import { categories, colorsList, formInputsList } from "../data";
 import { ICategory, IProduct } from "../interfaces";
 import ButtonComp from "./ui/ButtonComp";
@@ -8,13 +17,13 @@ import CircleColor from "./CircleColor";
 import SelectMenu from "./ui/SelectMenu";
 import { ProductValidation } from "../validations";
 import ErrorMessage from "./ErrorMessage";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 
 interface IProps {
   isEditOpen: boolean;
   setIsEditOpen: (isEditOpen: boolean) => void;
   product: IProduct;
-  setProduct: (product: IProduct) => void;
+  setProduct: Dispatch<SetStateAction<IProduct>>;
   products: IProduct[];
   setProducts: (products: IProduct[]) => void;
   defaultProduct: IProduct;
@@ -36,9 +45,14 @@ const EditProductModal = ({
     colors: "",
   };
   const editToast = () =>
-    toast.dark("Product Edited successfully!", {
+    toast.success("Product Edited successfully!", {
       position: "top-left",
       icon: <>👍</>,
+      style: {
+        backgroundColor: "black",
+        color: "white",
+      },
+      duration: 1000,
     });
   const categoryOfProduct = categories.filter(
     (c) => c.name === product.category.name
@@ -72,11 +86,14 @@ const EditProductModal = ({
     setSelectedColors((prev) => [...prev, newColor]);
   };
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setProduct({ ...product, [name]: value });
-    setErrors({ ...errors, [name]: "" });
-  };
+  const handleInputChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      const { name, value } = e.target;
+      setProduct((prev) => ({ ...prev, [name]: value }));
+      setErrors({ ...errors, [name]: "" });
+    },
+    [errors, setProduct]
+  );
   const handleEditSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const returnedErrors = ProductValidation({
@@ -182,4 +199,4 @@ const EditProductModal = ({
   );
 };
 
-export default EditProductModal;
+export default memo(EditProductModal);

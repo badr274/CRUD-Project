@@ -1,7 +1,8 @@
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import { IProduct } from "../interfaces";
 import ButtonComp from "./ui/ButtonComp";
 import MyModal from "./ui/Modal";
+import { memo } from "react";
 
 interface IProps {
   isDeleteOpen: boolean;
@@ -18,15 +19,19 @@ const DeleteProductModal = ({
   productToDelete,
 }: IProps) => {
   const deleteToast = () =>
-    toast.dark("Product deleted successfully!", {
+    toast.success("Product deleted successfully!", {
       position: "top-left",
       icon: <>👍</>,
+      style: {
+        backgroundColor: "black",
+        color: "white",
+      },
+      duration: 1000,
     });
   const handleRemoveProduct = () => {
     const filteredProducts = products.filter(
       (p) => p.id !== productToDelete.id
     );
-    console.log(filteredProducts);
     setProducts(filteredProducts);
     closeDeleteModal();
     deleteToast();
@@ -62,4 +67,4 @@ const DeleteProductModal = ({
   );
 };
 
-export default DeleteProductModal;
+export default memo(DeleteProductModal);

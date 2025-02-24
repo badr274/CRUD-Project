@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, memo, useCallback, useState } from "react";
 import CircleColor from "./CircleColor";
 import MyModal from "./ui/Modal";
 import { categories, colorsList, formInputsList } from "../data";
@@ -8,7 +8,8 @@ import InputComponent from "./ui/InputComponent";
 import SelectMenu from "./ui/SelectMenu";
 import ButtonComp from "./ui/ButtonComp";
 import { v4 as uuid } from "uuid";
-import { toast } from "react-toastify";
+import toast from "react-hot-toast";
+// import { toast } from "react-toastify";
 interface IProps {
   products: IProduct[];
   setProducts: (products: IProduct[]) => void;
@@ -17,9 +18,14 @@ interface IProps {
   defaultProduct: IProduct;
 }
 const addToast = () => {
-  return toast.dark("Product Added successfully!", {
+  return toast.success("Product Added successfully!", {
     position: "top-left",
     icon: <>👍</>,
+    style: {
+      backgroundColor: "black",
+      color: "white",
+    },
+    duration: 1000,
   });
 };
 const AddProductModal = ({
@@ -55,11 +61,14 @@ const AddProductModal = ({
   };
 
   // Handle Change inputs
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setProduct({ ...product, [name]: value });
-    setErrors({ ...errors, [name]: "" });
-  };
+  const handleInputChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      const { name, value } = e.target;
+      setProduct((prev) => ({ ...prev, [name]: value }));
+      setErrors({ ...errors, [name]: "" });
+    },
+    [errors]
+  );
 
   // Handle Canceling Modals
 
@@ -190,4 +199,4 @@ const AddProductModal = ({
   );
 };
 
-export default AddProductModal;
+export default memo(AddProductModal);

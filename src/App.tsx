@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import ProductCard from "./components/ProductCard";
 import ButtonComp from "./components/ui/ButtonComp";
 import { IProduct } from "./interfaces";
@@ -6,7 +6,7 @@ import { productList } from "./data";
 import AddProductModal from "./components/AddProductModal";
 import EditProductModal from "./components/EditProductModal";
 import DeleteProductModal from "./components/DeleteProductModal";
-import MyToast from "./components/ui/MyToast";
+import { Toaster } from "react-hot-toast";
 
 const App = () => {
   const defaultProduct = {
@@ -30,16 +30,19 @@ const App = () => {
   const [productToDelete, setProductToDelete] =
     useState<IProduct>(defaultProduct);
   /*________HANDLERS_________*/
-  const openAddModal = () => setIsAddOpen(true);
-  const openEditModal = (product: IProduct) => {
-    setIsEditOpen(true);
-    setProductToEdit(product);
-    setIdxOfProduct(products.indexOf(product));
-  };
-  const openDeleteModal = (product: IProduct) => {
+  const openAddModal = useCallback(() => setIsAddOpen(true), []);
+  const openEditModal = useCallback(
+    (product: IProduct) => {
+      setIsEditOpen(true);
+      setProductToEdit(product);
+      setIdxOfProduct(products.indexOf(product));
+    },
+    [products]
+  );
+  const openDeleteModal = useCallback((product: IProduct) => {
     setIsDeleteOpen(true);
     setProductToDelete(product);
-  };
+  }, []);
   const closeDeleteModal = () => setIsDeleteOpen(false);
 
   /*________RENDERS_________*/
@@ -95,7 +98,8 @@ const App = () => {
           {renderProducts}
         </div>
       </div>
-      <MyToast />
+      {/* <MyToast /> */}
+      <Toaster />
     </>
   );
 };

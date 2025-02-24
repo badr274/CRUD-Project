@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-empty-object-type */
-import { InputHTMLAttributes } from "react";
+import { InputHTMLAttributes, memo } from "react";
 
 interface IProps extends InputHTMLAttributes<HTMLInputElement> {}
 const InputComponent = ({ ...rest }: IProps) => {
@@ -12,4 +12,4 @@ const InputComponent = ({ ...rest }: IProps) => {
   );
 };
 
-export default InputComponent;
+export default memo(InputComponent);
